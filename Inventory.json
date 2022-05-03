@@ -1,0 +1,38 @@
+[
+  {
+    "type": "item",
+    "amount": 1,
+    "info": {
+      "type": "Class C Driver License",
+      "lastname": "Garcia",
+      "firstname": "John",
+      "birthdate": "1969-04-04"
+    },
+    "slot": 1,
+    "name": "driver_license"
+  },
+  {
+    "type": "weapon",
+    "amount": 1,
+    "info": { "serie": "34OOR9ir679ZdUE", "ammo": 0 },
+    "slot": 2,
+    "name": "weapon_assaultrifle"
+  },
+  {
+    "type": "item",
+    "amount": 1,
+    "info": {
+      "nationality": "German",
+      "lastname": "Garcia",
+      "gender": 0,
+      "firstname": "John",
+      "citizenid": "PZM09469",
+      "birthdate": "1969-04-04"
+    },
+    "slot": 3,
+    "name": "id_card"
+  },
+  { "amount": 1, "info": [], "slot": 4, "name": "disc_ammo_rifle_large" },
+  { "amount": 1, "info": [], "slot": 5, "name": "disc_ammo_rifle" },
+  { "amount": 1, "info": [], "slot": 8, "name": "phone" }
+]
