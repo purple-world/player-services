@@ -1,21 +1,35 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore.InMemory;
 using PlayerService.Data;
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 public class Startup
 {
-    public Startup(IConfiguration configuration)
-    {
-        configuration = configuration;
-    }
     public IConfiguration Configuration { get; }
+    private readonly IWebHostEnvironment _env;
+    public Startup(IConfiguration configuration, IWebHostEnvironment env)
+    {
+        Configuration = configuration;
+        _env = env;
+    }
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
         // Add services to the container.
-        services.AddDbContext<AppDbContext>(opt => opt.UseMemoryCache());
+        if (_env.IsProduction())
+        {
+            services.AddDbContext<AppDbContext>(opt =>
+                opt.UseNpgsql(Configuration.GetConnectionString("PlayerConnect"))
+            );
+        }
+        else
+        {
+            Console.WriteLine("--> Using InMem Db");
+            services.AddDbContext<AppDbContext>(opt =>
+                 opt.UseInMemoryDatabase("InMem"));
+        }
+        // Interface > Concrete Class pattern
+        services.AddScoped<IPlayerRepo, PlayerRepo>();
         services.AddAuthentication(options =>
         {
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -24,7 +38,7 @@ public class Startup
 
         services.AddAuthorization();
         services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        // Swagger/OpenAPI https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 

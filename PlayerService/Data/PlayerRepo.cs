@@ -4,7 +4,6 @@ namespace PlayerService.Data
 {
     public class PlayerRepo : IPlayerRepo
     {
-        //Dependency injection of AppDbContext
         private readonly AppDbContext _context;
 
         public PlayerRepo(AppDbContext context)
@@ -14,7 +13,12 @@ namespace PlayerService.Data
 
         public void CreatePlayer(Player player)
         {
-            throw new NotImplementedException();
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            _context.Player.Add(player);
         }
 
         public IEnumerable<Player> GetAllPlayers()
@@ -22,8 +26,9 @@ namespace PlayerService.Data
             return _context.Player.ToList();
         }
 
-        public Player GetPlayerByLicense(int license)
+        public Player GetPlayerByLicense(string license)
         {
+
             return _context.Player.FirstOrDefault(p => p.UserLicense == license);
         }
 

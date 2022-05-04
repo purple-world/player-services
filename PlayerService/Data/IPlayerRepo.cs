@@ -8,7 +8,7 @@ namespace PlayerService.Data
         bool SaveChanges();
 
         IEnumerable<Player> GetAllPlayers();
-        Player GetPlayerByLicense(int license);
+        Player GetPlayerByLicense(string license);
         void CreatePlayer(Player player);
     }
 }
