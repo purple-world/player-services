@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.InMemory;
+using PlayerService.Data;
 
 public class Startup
 {
@@ -12,6 +15,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // Add services to the container.
+        services.AddDbContext<AppDbContext>(opt => opt.UseMemoryCache());
         services.AddAuthentication(options =>
         {
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -25,7 +29,7 @@ public class Startup
         services.AddSwaggerGen();
 
     }
-    //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    //Request Pipeline. This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(WebApplication app, IWebHostEnvironment env)
     {
         // Configure the HTTP request pipeline.
@@ -40,7 +44,7 @@ public class Startup
         app.MapControllers();
         app.MapGet("/", () =>
         {
-            return "hello world";
+            return "yo";
         }).RequireAuthorization();
 
         app.Run();
