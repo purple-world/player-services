@@ -28,7 +28,6 @@ namespace PlayerService.Data
 
         public Player GetPlayerByLicense(string license)
         {
-
             return _context.Player.FirstOrDefault(p => p.UserLicense == license);
         }
 
