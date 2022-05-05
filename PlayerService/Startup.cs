@@ -24,7 +24,7 @@ public class Startup
         }
         else
         {
-            Console.WriteLine("--> Using InMem Db");
+            Console.WriteLine("Using InMem DbContext");
             services.AddDbContext<AppDbContext>(opt =>
                  opt.UseInMemoryDatabase("InMem"));
         }
@@ -41,7 +41,7 @@ public class Startup
         // Swagger/OpenAPI https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
     //Request Pipeline. This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -56,11 +56,11 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-        app.MapGet("/", () =>
+        app.MapGet("/dashboard", () =>
         {
             return "yo";
         }).RequireAuthorization();
-
+        Seed.SeedPlayer0(app);
         app.Run();
     }
 }

@@ -1,27 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using PlayerService.Models;
 
-namespace PlayerService.Models
+namespace PlayerService.Dtos
 {
-    public class Player
+    public class PlayerReadDto
     {
-        [Key]
-        [Required]
         public string CitizenID { get; set; }
-        [Required]
         public string UserLicense { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string Money { get; set; }
-        [Required]
         public string Job { get; set; }
-        [Required]
         public string Gang { get; set; }
-        [Required]
         public string Position { get; set; }
-        [Required]
         public string Inventory { get; set; }
-        [Required]
         public DateTime LastUpdated { get; set; }
     }
 }
