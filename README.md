@@ -1,6 +1,8 @@
 # microservice-architecture
 
-This is a context bounded microservice architecture for a networked player framework.
+This is a context bounded microservice architecture for a networked game.
+
+Game design for player framework is based on roleplay life mods. 
 
 Primarily uses ASP.NET DDD design patterns.
 
