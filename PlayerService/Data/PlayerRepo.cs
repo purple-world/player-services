@@ -1,4 +1,6 @@
-﻿using PlayerService.Models;
+﻿using System.Security.AccessControl;
+using System.Xml;
+using PlayerService.Models;
 
 namespace PlayerService.Data
 {
@@ -26,9 +28,13 @@ namespace PlayerService.Data
             return _context.Player.ToList();
         }
 
-        public Player GetPlayerByLicense(string license)
+        public Player GetPlayerByLicense(Guid license)
         {
-            return _context.Player.FirstOrDefault(p => p.UserLicense == license);
+            var res = _context.Player.FirstOrDefault(p => p.UserLicense == license);
+            if (res != null) {
+                return res;
+            }
+            throw new ArgumentException("A problem occured accesing this context.");
         }
 
         public bool SaveChanges()

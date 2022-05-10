@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Xml;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PlayerService.Data;
 using PlayerService.Dtos;
@@ -20,8 +21,22 @@ namespace PlayerService.Controllers
         public ActionResult<IEnumerable<PlayerReadDto>> GetPlayers()
         {
             Console.WriteLine("Get Players");
-            var playerItem = _repository.GetAllPlayers();
-            return Ok(_mapper.Map<IEnumerable<PlayerReadDto>>(playerItem));
+            var playerAll = _repository.GetAllPlayers();
+            if(playerAll != null) {
+                return Ok(_mapper.Map<IEnumerable<PlayerReadDto>>(playerAll));
+            }
+            return NotFound();
+        }
+
+        [HttpGet("{userLicense}", Name = "GetPlayersFromLicense")]
+        public ActionResult<PlayerReadDto> GetPlayersFromLicense(string userLicense)
+        {
+            Guid licenseGUID = new Guid(userLicense);
+            var playerOwn = _repository.GetPlayerByLicense(licenseGUID);
+            if (playerOwn != null) {
+                return Ok(_mapper.Map<PlayerReadDto>(playerOwn));
+            }
+            return NotFound();
         }
     }
 }

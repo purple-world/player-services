@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: platforms-depl
+  name: players-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: platformservice
+      app: playerservice
   template:
     metadata:
       labels:
-        app: platformservice
+        app: playerservice
     spec:
       containers:
-        - name: platformservice
-          image: binarythistle/platformservice:latest
+        - name: playerservice
+          image: binarythistle/playerservice:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: platforms-clusterip-srv
+  name: players-clusterip-srv
 spec:
   type: ClusterIP
   selector:
-    app: platformservice
+    app: playerservice
   ports:
-  - name: platformservice
+  - name: playerservice
     protocol: TCP
     port: 80
     targetPort: 80

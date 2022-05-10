@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Xml;
 
 namespace PlayerService.Models
 {
     public class Player
     {
+        [Required]
         [Key]
+        public int CitizenId { get; set; }
         [Required]
-        public string CitizenID { get; set; }
-        [Required]
-        public string UserLicense { get; set; }
+        public Guid UserLicense { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

@@ -1,4 +1,5 @@
-﻿using PlayerService.Models;
+﻿using System.Xml;
+using PlayerService.Models;
 
 namespace PlayerService.Data
 {
@@ -6,9 +7,8 @@ namespace PlayerService.Data
     public interface IPlayerRepo
     {
         bool SaveChanges();
-
         IEnumerable<Player> GetAllPlayers();
-        Player GetPlayerByLicense(string license);
+        Player GetPlayerByLicense(Guid license);
         void CreatePlayer(Player player);
     }
 }
