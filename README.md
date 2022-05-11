@@ -1,4 +1,4 @@
-# microservice-architecture
+# microservice-architecture for an UE5 player service
 
 This is a context bounded microservice architecture for a networked game.
 
