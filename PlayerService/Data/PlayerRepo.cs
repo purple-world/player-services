@@ -1,5 +1,7 @@
-﻿using System.Security.AccessControl;
+﻿using System.ComponentModel;
+using System.Security.AccessControl;
 using System.Xml;
+using Microsoft.EntityFrameworkCore;
 using PlayerService.Models;
 
 namespace PlayerService.Data
@@ -28,9 +30,11 @@ namespace PlayerService.Data
             return _context.Player.ToList();
         }
 
-        public Player GetPlayerByLicense(Guid license)
+        public IEnumerable<Player> GetPlayersByLicense(Guid license)
         {
-            var res = _context.Player.FirstOrDefault(p => p.UserLicense == license);
+            var res = _context.Player
+            .Where(p => p.UserLicense == license)
+            .ToList();
             if (res != null) {
                 return res;
             }
