@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using PlayerService.Data;
-using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 public class Startup
 {
@@ -15,21 +12,6 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        // Add services to the container.
-        if (_env.IsProduction())
-        {
-            services.AddDbContext<AppDbContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("PlayerConnect"))
-            );
-        }
-        else
-        {
-            Console.WriteLine("Using InMem DbContext");
-            services.AddDbContext<AppDbContext>(opt =>
-                 opt.UseInMemoryDatabase("InMem"));
-        }
-        // Interface > Concrete Class pattern
-        services.AddScoped<IPlayerRepo, PlayerRepo>();
         services.AddAuthentication(options =>
         {
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -41,7 +23,6 @@ public class Startup
         // Swagger/OpenAPI https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
     //Request Pipeline. This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -58,9 +39,8 @@ public class Startup
         app.MapControllers();
         app.MapGet("/dashboard", () =>
         {
-            return "yo";
+            return "yo it's the secret user service dashboard";
         }).RequireAuthorization();
-        Seed.SeedPlayer0(app);
         app.Run();
     }
 }

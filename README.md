@@ -9,7 +9,7 @@ Primarily uses ASP.NET DDD patterns.
 RabbitMQ is used as a pub/sub message broker between services.
 
 ## User Service
-
+./UserService
 ## Player Service
 
 ## Job Service
