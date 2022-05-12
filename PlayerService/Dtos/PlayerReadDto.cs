@@ -6,7 +6,7 @@ namespace PlayerService.Dtos
 {
     public class PlayerReadDto
     {
-        public int CitizenID { get; set; }
+        public int CitizenId { get; set; }
         public Guid UserLicense { get; set; }
         public string Name { get; set; }
         public string Money { get; set; }

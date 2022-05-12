@@ -23,7 +23,6 @@ namespace PlayerService.Data
                 Guid userLicense = Guid.NewGuid();
                 var player0 = new Models.Player()
                 {
-                    CitizenId = 0,
                     UserLicense = userLicense,
                     Name = "Carrucan",
                     Money = "{'crypto':0,'bank':5120,'cash':500}",
