@@ -19,7 +19,6 @@ namespace PlayerService.Data
                 //var dob = new DateTime(1969, 04, 20);
                 //var charInfo = new Models.CharInfo() { FirstName = "Tony", LastName = "Tono", Backstory = "Son of the great Tono Tono.", Phone = 1558679267, Sex = 1, BirthDate = dob};
                 //var player0Meta = new Models.MetaData() { BloodType = "AB+", CurrentApartment = "Office", Fingerprint = "JB632M89XoO2437", InJail = 0 };
-                UniqueId citizenID = new UniqueId();
                 Guid userLicense = Guid.NewGuid();
                 var player0 = new Models.Player()
                 {
